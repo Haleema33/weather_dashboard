@@ -30,14 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const { main, name, weather, wind } = data;
+        const { main, name, weather, wind,dt } = data;
+       const dateTime = dt ? new Date(dt * 1000).toLocaleString() : 'N/A';
+       
         currentWeatherDiv.innerHTML = `
+        <div class="weather-card" onclick="moveCartoon(this)" >
             <h2>${name}</h2>
+            <p>Current Time: ${dateTime}</p>
             <p>Temperature: ${main.temp} °C</p>
             <p>Humidity: ${main.humidity}%</p>
             <p>Wind Speed: ${wind.speed} m/s</p>
             <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
             <p>${weather[0].description}</p>
+            </div>
+            <div class="animation-container">
+            <img class="cartoon-image" src="images/thewayofcolor-JyOeDt0kRYc-unsplash.jpg" alt="Cartoon Image">
+</div>
+            </div>
         `;
 
         // Fetch 5-day forecast
@@ -49,17 +58,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayForecast(data) {
+         // Group forecast data by date
+         const forecastByDate = data.list.reduce((acc, item) => {
+            const date = new Date(item.dt * 1000).toLocaleDateString();
+            if (!acc[date]) acc[date] = [];
+            acc[date].push(item);
+            return acc;
+        }, {});
+
         forecastDiv.innerHTML = '<h3>5-Day Forecast</h3>';
-        data.list.forEach(item => {
+        for (const date in forecastByDate) {
             forecastDiv.innerHTML += `
-                <div>
-                    <p>${new Date(item.dt * 1000).toLocaleDateString()}</p>
-                    <p>Temperature: ${item.main.temp} °C</p>
-                    <p>${item.weather[0].description}</p>
-                    <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}.png" alt="${item.weather[0].description}">
+                <div class="forecast-card">
+                    <h4>${date}</h4>
+                    <div class="weather-container">
+                        ${forecastByDate[date].map(item => `
+                            <div>
+                                <p>${new Date(item.dt * 1000).toLocaleTimeString()}</p>
+                                <p>Temperature: ${item.main.temp} °C</p>
+                                <p>${item.weather[0].description}</p>
+                                <img src="http://openweathermap.org/img/wn/${item.weather[0].icon}.png" alt="${item.weather[0].description}">
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
             `;
-        });
+        }
     }
 
     // Load last searched city from local storage
@@ -67,4 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lastCity) {
         fetchWeather(lastCity);
     }
-});
+})
+
+function moveCartoon(card) {
+    const cartoonImage = card.querySelector('.cartoon-image');
+    cartoonImage.style.animation = 'moveCartoonImage 2s ease forwards';
+    setTimeout(() => {
+        cartoonImage.style.animation = ''; // Reset animation after completion
+    }, 2000); // Adjust timing to match animation duration
+}
+;

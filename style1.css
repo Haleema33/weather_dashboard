@@ -1,0 +1,249 @@
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.container {
+    transition: margin-left 0.5s;
+    padding: 16px;
+} 
+
+#menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+
+/*body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 70%;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#current-weather, #forecast {
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*new code for the forms */
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('images/rafael-garcin-sqZ4GeyYGx8-unsplash.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(13, 12, 12);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+#menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+#search-form {
+    margin-bottom: 20px;
+}
+
+#search-form input, #search-form button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.weather-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    
+}
+
+.weather-card, .forecast-card {
+    position: relative; /* Position relative for absolute positioning of cartoon image */
+    background: rgba(240, 224, 237, 0.121); /* Transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(64, 25, 132, 0.2);
+    cursor: pointer; /* Change cursor to pointer for clickable effect */
+    overflow: hidden; /* Hide overflow to prevent image from overflowing */
+}
+
+.cartoon-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    transition: transform 0.5s ease; /* Add smooth transition */
+}
+
+/* Animation for moving the cartoon image */
+@keyframes moveCartoonImage {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    25% { transform: translate(-50%, -50%) rotate(45deg); }
+    50% { transform: translate(-50%, -50%) rotate(90deg); }
+    75% { transform: translate(-50%, -50%) rotate(135deg); }
+    100% { transform: translate(-50%, -50%) rotate(180deg); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.weather-card img, .forecast-card img {
+    margin-left: 20px;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.forecast-card {
+    margin: 20px;
+}
+
+.forecast-card > h4 {
+    text-align: center;
+}
+
+.forecast-card .weather-container > div {
+    background: rgb(23,48,88); /* Transparent background */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    text-align: center;
+}
+
+
+
+
+
+.forecast-card > div {
+    background: rgba(126, 46, 46, 0.5); /* Transparent background */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.weather-card h2, .weather-card p, .forecast-card p {
+    margin: 10px 0;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
+
