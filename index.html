@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let unit = 'metric'; // default unit
+           
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+
+            function success(position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                // Use OpenStreetMap's Nominatim API for reverse geocoding
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const city = data.address.city || data.address.town || data.address.village || data.address.state;
+                        if (city) {
+                            fetchWeather(city);
+                        } else {
+                            alert("Unable to determine city from your location.");
+                        }
+                    })
+                    .catch(() => alert("Failed to fetch location details."));
+            }
+
+            function error() {
+                alert("Unable to retrieve your location.");
+            }
+
+            function fetchWeather(city) {
+                fetch(`weather.php?city=${city}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Process and display the weather data
+                        console.log(data);
+                    })
+                    .catch(() => alert("Failed to fetch weather data."));
+            }
+
+            document.getElementById("menu-icon").onclick = function() {
+                openNav();
+            }
+
+            document.getElementById("closebtn").onclick = function() {
+                closeNav();
+            }
+
+            document.getElementById("add-city-form").onsubmit = function(event) {
+                event.preventDefault();
+                const newCity = document.getElementById("new-city").value;
+                addFavoriteCity(newCity);
+            }
+
+            document.getElementById("unit-select").onchange = function() {
+                unit = this.value;
+                // You can add additional logic to update the weather display with the new unit
+            }
+        });
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.querySelector(".container").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.querySelector(".container").style.marginLeft = "auto";
+        }
+
+        function addFavoriteCity(city) {
+            const favCitiesList = document.getElementById("favorite-cities");
+            const cityItem = document.createElement("li");
+            cityItem.textContent = city;
+            cityItem.onclick = function() {
+                fetchWeather(city);
+            }
+            favCitiesList.appendChild(cityItem);
+        }
+
+        function fetchWeather(city) {
+            fetch(`weather.php?city=${city}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // Process and display the weather data
+                })
+                .catch(() => alert("Failed to fetch weather data."));
+        }
+
+        ;
+    </script>
+
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
+        <a href="#">Favorite Cities</a>
+        <ul id="favorite-cities"></ul>
+        <form id="add-city-form">
+            <div class="form-group">
+                <input type="text" id="new-city" placeholder="Add new city" required>
+            </div>
+            <button type="submit">Add City</button>
+        </form>
+       
+    </div>
+
+    <div class="container">
+        <span id="menu-icon">&#9776; Menu</span>
+        <h1>Weather Dashboard</h1>
+        <form id="search-form">
+            <input type="text" id="city" placeholder="Enter city name">
+            <button type="submit">Search</button>
+        </form>
+        <div id="current-weather">
+            <!-- Current weather will be displayed here -->
+        </div>
+        <div id="forecast">
+            <!-- 5-day forecast will be displayed here -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
