@@ -4,7 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
+        <a href="#">Favorite Cities</a>
+        <ul id="favorite-cities"></ul>
+        <form id="add-city-form">
+            <div class="form-group">
+                <input type="text" id="new-city" placeholder="Add new city" required>
+            </div>
+            <button type="submit">Add City</button>
+        </form>
+       
+    </div>
+
+    <div class="container">
+        <span id="menu-icon">&#9776; Menu</span>
+        <h1>Weather Forecast</h1>
+        <form id="search-form">
+            <input type="text" id="city" placeholder="Enter city name">
+            <button type="submit">Search</button>
+        </form>
+        <div class="weather-container">
+            <div id="current-weather" class="weather-card" >
+                <!-- Current weather will be displayed here -->
+                <div class="weather-info">
+                    <h2>City Name</h2>
+                    <p>Weather Description</p>
+                </div>
+                <div class="weather-temp">
+                    <h1>25°C</h1>
+                </div>
+
+
+            </div>
+            <div id="forecast" class="forecast-card">
+                <!-- 5-day forecast will be displayed here -->
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -98,46 +138,8 @@
         ;
     </script>
 
-</head>
-<body>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" id="closebtn">&times;</a>
-        <a href="#">Favorite Cities</a>
-        <ul id="favorite-cities"></ul>
-        <form id="add-city-form">
-            <div class="form-group">
-                <input type="text" id="new-city" placeholder="Add new city" required>
-            </div>
-            <button type="submit">Add City</button>
-        </form>
-       
-    </div>
-
-    <div class="container">
-        <span id="menu-icon">&#9776; Menu</span>
-        <h1>Weather Forecast</h1>
-        <form id="search-form">
-            <input type="text" id="city" placeholder="Enter city name">
-            <button type="submit">Search</button>
-        </form>
-        <div class="weather-container">
-            <div id="current-weather" class="weather-card" >
-                <!-- Current weather will be displayed here -->
-                <div class="weather-info">
-                    <h2>City Name</h2>
-                    <p>Weather Description</p>
-                </div>
-                <div class="weather-temp">
-                    <h1>25°C</h1>
-                </div>
+    <script src="Script.js"></script>
 
 
-            </div>
-            <div id="forecast" class="forecast-card">
-                <!-- 5-day forecast will be displayed here -->
-            </div>
-        </div>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>
