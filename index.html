@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <title>Weather Forecast</title>
     <link rel="stylesheet" href="style1.css">
 
     <script>
@@ -115,7 +115,7 @@
 
     <div class="container">
         <span id="menu-icon">&#9776; Menu</span>
-        <h1>Weather Dashboard</h1>
+        <h1>Weather Forecast</h1>
         <form id="search-form">
             <input type="text" id="city" placeholder="Enter city name">
             <button type="submit">Search</button>
@@ -123,6 +123,15 @@
         <div class="weather-container">
             <div id="current-weather" class="weather-card" >
                 <!-- Current weather will be displayed here -->
+                <div class="weather-info">
+                    <h2>City Name</h2>
+                    <p>Weather Description</p>
+                </div>
+                <div class="weather-temp">
+                    <h1>25°C</h1>
+                </div>
+
+
             </div>
             <div id="forecast" class="forecast-card">
                 <!-- 5-day forecast will be displayed here -->

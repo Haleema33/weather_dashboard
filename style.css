@@ -49,14 +49,14 @@ body {
 
 
 
-body {
+/*body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-/*.container {
+.container {
     max-width: 600px;
     margin: 50px auto;
     background: #fff;
@@ -99,3 +99,180 @@ button:hover {
 #current-weather, #forecast {
     margin-top: 20px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*new code for the forms */
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('images/rafael-garcin-sqZ4GeyYGx8-unsplash.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: rgb(13, 12, 12);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+}
+
+#menu-icon {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+#search-form {
+    margin-bottom: 20px;
+}
+
+#search-form input, #search-form button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.weather-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+   
+    
+}
+
+ .forecast-card {
+    position: relative; /* Position relative for absolute positioning of cartoon image */
+    background: rgba(241, 234, 240, 0.121); /* Transparent background */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(64, 25, 132, 0.2);
+    cursor: pointer; /* Change cursor to pointer for clickable effect */
+    overflow: hidden; /* Hide overflow to prevent image from overflowing */
+}
+
+
+
+
+.weather-card {
+    position: relative;
+    background: rgba(241, 234, 240, 0.121);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(64, 25, 132, 0.2);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex; /* Use flexbox for positioning */
+    align-items: center; /* Center vertically */
+    flex-direction: row; /* Arrange items horizontally */
+    width: 80%; /* Full width */
+    height: auto;
+}
+
+.weather-info {
+    flex: 8; /* Take 80% of the space */
+    display: flex; /* Use flexbox for positioning */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.cartoon-image {
+    flex: 2; /* Take 20% of the space */
+    width: 20%; /* Full width */
+    height: auto;
+    margin-left: 20px; /* Add some space between image and weather info */
+}
+
+/* Animation for moving the cartoon image */
+@keyframes moveCartoonImage {
+    0% { margin-left: auto; }
+    25% { margin-left: 50px; }
+    50% { margin-left: 100px; }
+    75% { margin-left: 150px; }
+    100% { margin-left: 200px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.weather-card img, .forecast-card img {
+    margin-left: 20px;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.forecast-card {
+    margin: 20px;
+}
+
+.forecast-card > h4 {
+    text-align: center;
+}
+
+.forecast-card .weather-container > div {
+    background: rgb(23,48,107); /* Transparent background */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    text-align: center;
+}
+
+
+
+
+
+.forecast-card > div {
+    background:  rgb(57, 69, 128);; /* Transparent background */
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    text-align: center;
+}
+
+.weather-card h2, .weather-card p, .forecast-card p {
+    margin: 10px 0;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
+

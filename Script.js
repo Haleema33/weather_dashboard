@@ -14,7 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fetchWeather(city) {
         fetch(`fetchWeather.php?city=${city}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch weather data.');
+                }
+                return response.json();
+            })
             .then(data => {
                 displayWeather(data);
                 localStorage.setItem('lastCity', city);
@@ -35,16 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
        
         currentWeatherDiv.innerHTML = `
         <div class="weather-card" onclick="moveCartoon(this)" >
-            <h2>${name}</h2>
-            <p>Current Time: ${dateTime}</p>
-            <p>Temperature: ${main.temp} °C</p>
-            <p>Humidity: ${main.humidity}%</p>
-            <p>Wind Speed: ${wind.speed} m/s</p>
+        <h2 style="text-align: left;">${name}</h2>
+ 
+            
+            <h3>Current Time:  ${dateTime} <br>
+            Temperature:  ${main.temp} °C  <br>
+            Humidity:  ${main.humidity}%  <br>
+            Wind Speed:  ${wind.speed} m/s</h3>
             <img src="http://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
-            <p>${weather[0].description}</p>
+            <h3>${weather[0].description}</h3>
             </div>
             <div class="animation-container">
-            <img class="cartoon-image" src="images/thewayofcolor-JyOeDt0kRYc-unsplash.jpg" alt="Cartoon Image">
+            <img class="cartoon-image" src="images/LXANLPAI_output_1.jpeg" alt="Cartoon Image">
 </div>
             </div>
         `;
@@ -100,4 +107,8 @@ function moveCartoon(card) {
         cartoonImage.style.animation = ''; // Reset animation after completion
     }, 2000); // Adjust timing to match animation duration
 }
+
+
+
+
 ;
