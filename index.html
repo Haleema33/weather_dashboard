@@ -21,12 +21,16 @@
     </div>
 
     <div class="container">
-        <span id="menu-icon">&#9776; Menu</span>
-        <h1>Weather Forecast</h1>
+        
+        <h1> WEATHER FORECAST </h1>
+     <div class="header">
+        <span id="menu-icon">&#9776;</span>
         <form id="search-form">
             <input type="text" id="city" placeholder="Enter city name">
             <button type="submit">Search</button>
         </form>
+    </div>
+
         <div class="weather-container">
             <div id="current-weather" class="weather-card" >
                 <!-- Current weather will be displayed here -->
@@ -47,95 +51,90 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let unit = 'metric'; // default unit
-           
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error);
-            } else {
-                alert("Geolocation is not supported by this browser.");
-            }
+       document.addEventListener("DOMContentLoaded", function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
 
-            function success(position) {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
+    function success(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        
+        // Use OpenStreetMap's Nominatim API for reverse geocoding
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+                const city = data.address.city || data.address.town || data.address.village || data.address.state;
+                if (city) {
+                    fetchWeatherByCoordinates(lat, lon);
+                } else {
+                    alert("Unable to determine city from your location.");
+                }
+            })
+            .catch(() => alert("Failed to fetch location details."));
+    
+    }
 
-                // Use OpenStreetMap's Nominatim API for reverse geocoding
-                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const city = data.address.city || data.address.town || data.address.village || data.address.state;
-                        if (city) {
-                            fetchWeather(city);
-                        } else {
-                            alert("Unable to determine city from your location.");
-                        }
-                    })
-                    .catch(() => alert("Failed to fetch location details."));
-            }
+    function error() {
+        alert("Unable to retrieve your location.");
+    }
 
-            function error() {
-                alert("Unable to retrieve your location.");
-            }
+    function fetchWeatherByCoordinates(lat, lon) {
+        fetch(`fetchWeather.php?lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+                // Process and display the weather data
+                console.log(data);
+            })
+            .catch(() => alert("Failed to fetch weather data."));
+    }
 
-            function fetchWeather(city) {
-                fetch(`weather.php?city=${city}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Process and display the weather data
-                        console.log(data);
-                    })
-                    .catch(() => alert("Failed to fetch weather data."));
-            }
+    document.getElementById("menu-icon").onclick = function() {
+        openNav();
+    }
 
-            document.getElementById("menu-icon").onclick = function() {
-                openNav();
-            }
+    document.getElementById("closebtn").onclick = function() {
+        closeNav();
+    }
 
-            document.getElementById("closebtn").onclick = function() {
-                closeNav();
-            }
+    document.getElementById("add-city-form").onsubmit = function(event) {
+        event.preventDefault();
+        const newCity = document.getElementById("new-city").value;
+        addFavoriteCity(newCity);
+    }
 
-            document.getElementById("add-city-form").onsubmit = function(event) {
-                event.preventDefault();
-                const newCity = document.getElementById("new-city").value;
-                addFavoriteCity(newCity);
-            }
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.querySelector(".container").style.marginLeft = "250px";
+    }
 
-           
-        });
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.querySelector(".container").style.marginLeft = "auto";
+    }
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.querySelector(".container").style.marginLeft = "250px";
-        }
+    function addFavoriteCity(city) {
+        const favCitiesList = document.getElementById("favorite-cities");
+        const cityItem = document.createElement("li");
+        cityItem.textContent = city;
+        favCitiesList.appendChild(cityItem);
+    
+    }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.querySelector(".container").style.marginLeft = "auto";
-        }
-
-        function addFavoriteCity(city) {
-            const favCitiesList = document.getElementById("favorite-cities");
-            const cityItem = document.createElement("li");
-            cityItem.textContent = city;
-            cityItem.onclick = function() {
-                fetchWeather(city);
-            }
-            favCitiesList.appendChild(cityItem);
-        }
-
-        function fetchWeather(city) {
-            fetch(`weather.php?city=${city}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    // Process and display the weather data
-                })
-                .catch(() => alert("Failed to fetch weather data."));
-        }
-
-        ;
+    
+    function fetchWeatherByCity(city) {
+        fetch(`fetchWeather.php?city=${city}`)
+            .then(response => response.json())
+            .then(data => {
+                // Process and display the weather data
+                console.log(data);
+            })
+            .catch(() => alert("Failed to fetch weather data."));
+    }
+});
+;
     </script>
 
     <script src="Script.js"></script>

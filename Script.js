@@ -106,9 +106,5 @@ function moveCartoon(card) {
     setTimeout(() => {
         cartoonImage.style.animation = ''; // Reset animation after completion
     }, 2000); // Adjust timing to match animation duration
-}
-
-
-
-
+};
 ;
