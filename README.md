@@ -19,7 +19,7 @@ To run the project locally on `localhost:3000`:
 
 1. Clone the repository.
 2. Obtain an API key from OpenWeatherMap.
-3. Replace `'apiKey'` in `fetchWeather.php` with your actual API key.
+3. Replace `'apiKey'` in `fetchWeather.php` with your actual API key OR you can also use the given api key.
 4. Install a local server, such as XAMPP or WAMP, if you don't already have one.
 5. Start the local server and navigate to the project directory.
 6. Access the project through your local server, e.g., `http://localhost:3000/index.html`.
